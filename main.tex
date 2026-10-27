@@ -1,0 +1,59 @@
+% Change [review] to [camera] for the final, identified version.
+\documentclass[review]{journalofnichenlp}
+
+\title{A Sample Article for the Journal of Niche NLP}
+\shorttitle{A Sample Journal of Niche NLP Article}
+\authors{Ada Author\textsuperscript{1} \and Richard Researcher\textsuperscript{2}}
+\affiliations{\textsuperscript{1}Department of Computational Linguistics, Example University\\
+\textsuperscript{2}Institute for Language Technology, Sample College}
+\correspondence{Ada Author, ada@example.com}
+\publicationyear{2026}
+\citationauthors{Author, A., \& Researcher, R.}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is a ready-to-adapt one-column submission template for the \textit{Journal of Niche NLP}. It demonstrates anonymous review, camera-ready front matter, APA-style author--date citations, and standard scholarly objects.
+\end{abstract}
+
+\section{Introduction}
+Research writing benefits from a consistent and readable format. Narrative citations use \citet{uralicnlp_2019}, while parenthetical citations use \citep{bird2009}. The generic command \cite{jurafsky2024} works too; \citeauthor{manning1999} produces just the author names, \citealt{manning1999} omits surrounding parentheses, and \citeyear{bird2009} produces only the year.
+
+\section{Methods}
+\subsection{Data}
+Explain data sources, permissions, and preprocessing clearly. Use cross-references such as Table~\ref{tab:results} and Figure~\ref{fig:workflow} rather than directional wording.
+
+\subsubsection{Evaluation protocol}
+State your evaluation measures and report enough detail for readers to reproduce the comparison.
+
+\paragraph{Significance testing}
+This fourth-level heading is numbered and styled. Describe statistical tests, uncertainty estimates, and any multiple-comparison correction here.
+
+\section{Results}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    System & Accuracy & F1 \\
+    \midrule
+    Baseline & 78.4 & 75.9 \\
+    Proposed method & \textbf{82.1} & \textbf{80.3} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Example results. Higher is better.}
+  \label{tab:results}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \fcolorbox{black}{jnllight}{\parbox[c][7em][c]{.74\linewidth}{\centering\sffamily Replace this panel with \texttt{\string\includegraphics[width=\string\linewidth]\{your-figure\}}.}}
+  \caption{Example figure placeholder.}
+  \label{fig:workflow}
+\end{figure}
+
+\section{Discussion}
+Keep prose direct and define specialist terminology at its first use. Add uncited sources only when essential; the bibliography automatically contains entries actually cited in the manuscript.
+
+\bibliography{references}
+\end{document}
