@@ -2,7 +2,7 @@
 """Compile real PDFs and check citation text and review anonymity.
 
 Run from any directory with pdflatex, bibtex and pdftotext on PATH.
-Use --baseline-class PATH to verify the original camera fallback failure too.
+Use --baseline-class PATH to verify the original missing authors and fallback error.
 """
 import argparse
 from pathlib import Path
@@ -35,10 +35,10 @@ def check(name, source, mode, override=None, baseline=False, bibliography=False)
     command = ['pdflatex', '-interaction=nonstopmode', '-halt-on-error', 'article.tex']
     result = run(command, directory)
     (directory / 'console.txt').write_text(result.stdout)
-    if baseline and mode == 'camera' and override is None:
+    if baseline and mode == 'camera' and override == '':
         assert result.returncode != 0, 'Original camera fallback unexpectedly compiled'
         assert 'Misplaced \\crcr.' in result.stdout, result.stdout
-        print(f'{name}: reproduced Misplaced \\crcr. at first-page shipout', flush=True)
+        print(f'{name}: reproduced Misplaced \\crcr. with an empty override at shipout', flush=True)
         return
     assert result.returncode == 0, result.stdout
     if bibliography:
@@ -62,6 +62,11 @@ def check(name, source, mode, override=None, baseline=False, bibliography=False)
     else:
         assert 'Ada Author' in text and 'Richard Researcher' in text, text
         citation = text.split('Citation:', 1)[1]
+        if baseline and override is None:
+            assert citation.startswith(' (2026).'), citation
+            assert 'Ada Author' not in citation and 'Richard Researcher' not in citation, citation
+            print(f'{name}: reproduced missing authors when override is omitted', flush=True)
+            return
         if override:
             assert 'Author, A., & Researcher, R. (2026).' in citation, citation
             assert 'Ada Author' not in citation, citation
@@ -80,8 +85,10 @@ if args.baseline_class:
     for mode in ('review', 'camera'):
         check(f'baseline-{mode}', minimal, mode, baseline=True)
     check('baseline-override', minimal, 'camera', override, baseline=True)
+    check('baseline-empty-override', minimal, 'camera', '', baseline=True)
 for mode in ('review', 'camera'):
     check(f'fallback-{mode}', minimal, mode)
     check(f'override-{mode}', minimal, mode, override)
+    check(f'empty-override-{mode}', minimal, mode, '')
     check(f'main-{mode}', (ROOT / 'main.tex').read_text().replace(
         r'\documentclass[review]', r'\documentclass'), mode, bibliography=True)

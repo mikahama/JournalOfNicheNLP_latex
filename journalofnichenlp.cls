@@ -70,7 +70,8 @@
 \newcommand{\jnl@affiliations}{}
 \newcommand{\jnl@correspondence}{}
 \newcommand{\jnl@year}{\number\year}
-\newcommand{\jnl@citationauthors}{}
+% Match the non-long \@empty used by the citation fallback's \ifx test.
+\newcommand*{\jnl@citationauthors}{}
 \newcommand{\jnl@shorttitle}{}
 \newcommand{\authors}[1]{\gdef\jnl@authors{#1}}
 \newcommand{\affiliations}[1]{\gdef\jnl@affiliations{#1}}

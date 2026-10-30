@@ -13,7 +13,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-latex-extra tex-gyre poppler-utils
-      - name: Reproduce original failure and verify fixed PDFs
+      - name: Reproduce original defects and verify fixed PDFs
         run: |
           git show d95f401db1b9d01834325c5345ef651db16f2610:journalofnichenlp.cls > "$RUNNER_TEMP/original.cls"
           python3 tests/check-citations.py --baseline-class "$RUNNER_TEMP/original.cls"

@@ -21,7 +21,7 @@ Review mode replaces author and affiliation information with an anonymous notice
 
 Set `\citationauthors{...}` to the APA-formatted author list that should appear in the camera-ready citation. If it is omitted, the displayed author information is used, with `\and` rendered as an inline “and” separator. Explicit citation author lists are used unchanged.
 
-The minimal [multiple-author regression example](tests/multiple-authors.tex) deliberately omits `\citationauthors`. Run `python3 tests/check-citations.py` to compile it and the supplied manuscript in review and camera modes, including explicit citation overrides. The check requires `pdflatex`, `bibtex`, and `pdftotext`; PDFs and logs are written under `build/`. CI also reproduces the original camera-mode failure before checking the fixed class.
+The minimal [multiple-author regression example](tests/multiple-authors.tex) deliberately omits `\citationauthors`. Run `python3 tests/check-citations.py` to compile it and the supplied manuscript in review and camera modes, including explicit and empty citation overrides. The check requires `pdflatex`, `bibtex`, and `pdftotext`; PDFs and logs are written under `build/`. CI also verifies the original defects: omission produces a citation without authors, while an explicitly empty override reaches the unsafe fallback and fails at shipout.
 
 ## Citations and bibliography
 
