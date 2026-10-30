@@ -1,4 +1,6 @@
 # LaTeX build products
+build/
+__pycache__/
 *.aux
 *.bbl
 *.blg
@@ -25,3 +27,4 @@
 *.swp
 *.swo
 .DS_Store
+

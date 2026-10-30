@@ -70,7 +70,8 @@
 \newcommand{\jnl@affiliations}{}
 \newcommand{\jnl@correspondence}{}
 \newcommand{\jnl@year}{\number\year}
-\newcommand{\jnl@citationauthors}{}
+% Match the non-long \@empty used by the citation fallback's \ifx test.
+\newcommand*{\jnl@citationauthors}{}
 \newcommand{\jnl@shorttitle}{}
 \newcommand{\authors}[1]{\gdef\jnl@authors{#1}}
 \newcommand{\affiliations}[1]{\gdef\jnl@affiliations{#1}}
@@ -78,7 +79,14 @@
 \newcommand{\publicationyear}[1]{\gdef\jnl@year{#1}}
 \newcommand{\citationauthors}[1]{\gdef\jnl@citationauthors{#1}}
 \newcommand{\shorttitle}[1]{\gdef\jnl@shorttitle{#1}}
-\newcommand{\jnl@citation}{\ifx\jnl@citationauthors\@empty\jnl@authors\else\jnl@citationauthors\fi\ (\jnl@year). \@title. \textit{Journal of Niche NLP}.}
+% Render the displayed authors inline only for the citation fallback. Keep this
+% local: the title block has its own separator and explicit overrides are verbatim.
+\newcommand{\jnl@citationauthorfallback}{%
+  \begingroup
+    \def\and{\unskip\space and\space\ignorespaces}%
+    \jnl@authors
+  \endgroup}
+\newcommand{\jnl@citation}{\ifx\jnl@citationauthors\@empty\jnl@citationauthorfallback\else\jnl@citationauthors\fi\ (\jnl@year). \@title. \textit{Journal of Niche NLP}.}
 
 \newcommand{\jnl@placefirstpagelogo}{%
   \AddToShipoutPictureFG*{%
@@ -133,3 +141,4 @@
 
 %% natbib supplies \cite, \citet, \citep, \citeauthor, \citeyear and \citealt.
 \endinput
+
