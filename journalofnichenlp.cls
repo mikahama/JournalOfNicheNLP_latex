@@ -94,7 +94,7 @@
       \IfFileExists{logo.png}{\includegraphics[width=28mm]{logo.png}}{%
         \sffamily\bfseries\small JOURNAL OF NICHE NLP}%
       \hspace{5mm}\raisebox{1mm}{\parbox[c]{70mm}{\small
-        \textbf{Journal of Niche NLP, ISSN XXXX-XXX}\\[-.15em]
+        \textbf{Journal of Niche NLP}\\[-.15em]
         \href{https://nichenlp.com}{https://nichenlp.com}}}}}}}
 \newcommand{\jnl@placecitationfooter}{%
   \AddToShipoutPictureFG*{%
