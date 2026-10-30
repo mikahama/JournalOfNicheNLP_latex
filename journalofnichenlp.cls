@@ -78,7 +78,14 @@
 \newcommand{\publicationyear}[1]{\gdef\jnl@year{#1}}
 \newcommand{\citationauthors}[1]{\gdef\jnl@citationauthors{#1}}
 \newcommand{\shorttitle}[1]{\gdef\jnl@shorttitle{#1}}
-\newcommand{\jnl@citation}{\ifx\jnl@citationauthors\@empty\jnl@authors\else\jnl@citationauthors\fi\ (\jnl@year). \@title. \textit{Journal of Niche NLP}.}
+% Render the displayed authors inline only for the citation fallback. Keep this
+% local: the title block has its own separator and explicit overrides are verbatim.
+\newcommand{\jnl@citationauthorfallback}{%
+  \begingroup
+    \def\and{\unskip\space and\space\ignorespaces}%
+    \jnl@authors
+  \endgroup}
+\newcommand{\jnl@citation}{\ifx\jnl@citationauthors\@empty\jnl@citationauthorfallback\else\jnl@citationauthors\fi\ (\jnl@year). \@title. \textit{Journal of Niche NLP}.}
 
 \newcommand{\jnl@placefirstpagelogo}{%
   \AddToShipoutPictureFG*{%
@@ -133,3 +140,4 @@
 
 %% natbib supplies \cite, \citet, \citep, \citeauthor, \citeyear and \citealt.
 \endinput
+

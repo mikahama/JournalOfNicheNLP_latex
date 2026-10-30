@@ -1,0 +1,17 @@
+% Intentionally omit the optional citation author override.
+% Default mode is camera; pass [review] from the command line to test anonymity.
+\documentclass{journalofnichenlp}
+\title{Multiple Author Regression}
+\authors{Ada Author\textsuperscript{1} \and Richard Researcher\textsuperscript{2}}
+\affiliations{\textsuperscript{1}Example University\\
+\textsuperscript{2}Sample College}
+\publicationyear{2026}
+\let\originaland\and
+\begin{document}
+\maketitle
+This minimal article exercises the first-page citation at shipout.
+\clearpage
+\ifx\and\originaland\else
+  \errmessage{The author separator definition leaked outside its group}
+\fi
+\end{document}

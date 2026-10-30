@@ -19,7 +19,9 @@ At the top of `main.tex`, choose exactly one mode:
 
 Review mode replaces author and affiliation information with an anonymous notice and suppresses citation metadata. Camera mode displays author information, the journal identity, and a bottom-of-page article citation with no volume, issue, or page range.
 
-Set `\citationauthors{...}` to the APA-formatted author list that should appear in the camera-ready citation. If it is omitted, the displayed author line is used.
+Set `\citationauthors{...}` to the APA-formatted author list that should appear in the camera-ready citation. If it is omitted, the displayed author information is used, with `\and` rendered as an inline “and” separator. Explicit citation author lists are used unchanged.
+
+The minimal [multiple-author regression example](tests/multiple-authors.tex) deliberately omits `\citationauthors`. Run `python3 tests/check-citations.py` to compile it and the supplied manuscript in review and camera modes, including explicit citation overrides. The check requires `pdflatex`, `bibtex`, and `pdftotext`; PDFs and logs are written under `build/`. CI also reproduces the original camera-mode failure before checking the fixed class.
 
 ## Citations and bibliography
 
@@ -39,3 +41,4 @@ The class numbers and styles `\section`, `\subsection`, `\subsubsection`, and `\
 ## Preparing a submission
 
 Replace the sample title, author information, text, table, figure, and bibliography entries with your own. Keep all cited sources in `references.bib`, compile the document using the sequence above, and submit the resulting PDF together with the `.tex`, `.bib`, and any figure files requested by the journal.
+
